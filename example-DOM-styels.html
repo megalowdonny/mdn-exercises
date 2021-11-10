@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple DOM example</title>
+    <style>
+      .highlight {
+        color: white;
+        background-color: black;
+        padding: 10px;
+        width: 250px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+      <section>
+        <img src="dinosaur.png" alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth.">
+        <p>Here we will add a link to the <a href="https://www.mozilla.org/">Mozilla homepage</a></p>
+      </section>
+
+      <script>
+        // Making a variable for the <section>
+        const sect = document.querySelector('section');
+
+        // Setting up a <p> to be appeneded to the <section>
+        const para = document.createElement('p')
+        para.textContent = 'We hope you enjoyed this ride.';
+
+        // Actually adding the <p> to the <section>
+        sect.appendChild(para);
+
+        // Setting up a text node to be created and appended
+        const text = document.createTextNode(' - the premier soruce for web development knowledge.');
+
+        // Taking the text node and appending it to the recently created ^ <p> element
+        const linkPara = document.querySelector('p');
+        linkPara.appendChild(text);
+
+        // Move the linkPara <p> to the bottom of the section, below the para one
+        sect.appendChild(linkPara);
+
+        // Removing the linkPara <p> in either of these 2 ways
+        //linkPara.remove(); or sect.removeChild(linkPara);
+
+        // This is the way to add styling inline to a variable referencing an element.
+        //para.style.color = 'white';
+        //para.style.backgroundColor = 'black';
+        //para.style.padding = '10px;';
+        //para.style.width = '250px';
+        //para.style.textAlign = 'center';
+
+        // Adding styling by dynamically assigning a class to an element
+        para.setAttribute('class', 'highlight');
+      </script>
+  </body>
+</html>

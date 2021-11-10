@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+      // Making the variables needed to do the rest of the stuff
+      const list = document.querySelector('ul');
+      const input = document.querySelector('input');
+      const button = document.querySelector('button');
+
+      // The function that occurs when the submit button is clicked, returns value in box to inputValue
+      button.onclick = function() {
+        let inputValue = input.value;
+        input.value = '';
+
+        // Creating variables and elements for the checklist itself
+        let listItem = document.createElement('li');
+        let itemName = document.createElement('span');
+        let deleteButton = document.createElement('button');
+
+        // Making the item name and delete button children of the list item
+        listItem.appendChild(itemName);
+        listItem.appendChild(deleteButton);
+
+        // Adding the correct text to the list item contents
+        itemName.textContent = inputValue;
+        deleteButton.textContent = 'Delete';
+
+        // Adding the list item to the <ul>
+        list.appendChild(listItem);
+        
+        // Adding functionality to the list item delete button
+        deleteButton.onclick = function() {
+          listItem.remove();
+        }
+
+        // Puts focus back on the input box to add next item automatically
+        input.focus();
+      }
+    </script>
+  </body>
+</html>
