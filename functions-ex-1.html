@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Functions: Task 1</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <section class="preview">
+
+
+
+    </section>
+
+  </body>
+  <script>
+    let names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada']
+    let para = document.createElement('p');
+
+    // Add your code here
+
+    // Making the function
+    function chooseName() {
+        // This Math method thing is something I got from google and it works well
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        // Gotta return the value so you can use it outside of this scope
+        return randomName;
+    }
+    // This .textContent method is filling in the <p> element created in the OG code on line 29
+    para.textContent = chooseName();
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+
+    section.appendChild(para);
+  </script>
+
+</html>
