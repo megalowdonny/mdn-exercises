@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+    <script type="text/javascript">
+      function draw() {
+        var canvas = document.getElementById('tutorial');
+        if (canvas.getContext) {
+          var ctx = canvas.getContext('2d');
+
+          // This is the big arc/circle demo. It uses 2 for loops to draw a total of 12 arcs in a 3x4 grid
+          for (var i = 0; i < 4; i++) { // This forms the 4 rows, and the i variable is used for arc caluclations
+            for (var j = 0; j < 3; j++) { // This draws 3 arcs, then lets the first for increment, which starts a new row
+              ctx.beginPath(); // This is within the loops in order to make sure each arc is self-contained and not connected
+              let x = 25 + j * 50; // X-coordinate, up here for clarity, 25 acts as padding, 50 * x makes sure each arc is spaced apart evenly
+              let y = 25 + i * 50; // Y-coordinate, same as X, but i is used instead of j since this should stay the same for each iteration of THIS for loop, but change on the next iteration/row
+              let radius = 20; // Arc radius, really not necessary to have this up here
+              let startAngle = 0; // Starting radian, still not necessary here
+              let endAngle = Math.PI + (Math.PI * j) / 2; // Each arc in a column has the same start/end angles, but different methods of filling/drawing. Each row either has a half circle, a 1/4 or 3/4 circle, and a full circle
+              let counterclockwise = i % 2 !== 0; // Checks the current row value to see if it's odd, which alternates the draw direction for each row
+
+              // Technically you could write all of the previous stuff here, but that would be gross. A good middleground would be (x, y, 20, 0, endAngle, counterclockwise)
+              ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+
+              // Sets the draw type to stroke for the first 2 rows and fill for the last 2
+              if (i > 1) {
+                ctx.fill();
+              } else {
+                ctx.stroke();
+              }
+            }
+
+          }
+
+          // Smiley face, didn't want to delete
+          //ctx.beginPath();
+          //ctx.arc(75, 75, 50, 0, Math.PI * 2, true);
+          //ctx.moveTo(110, 75);
+          //ctx.arc(75, 75, 35, 0, Math.PI, false);
+          //ctx.moveTo(65, 65);
+          //ctx.arc(60, 65, 5, 0, Math.PI * 2, true);
+          //ctx.moveTo(95, 65);
+          //ctx.arc(90, 65, 5, 0, Math.PI * 2, true);
+          //ctx.stroke();
+        }
+      }
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body onload="draw();">
+    <canvas id="tutorial" width="150" height="150"></canvas>
+  </body>
+</html>
