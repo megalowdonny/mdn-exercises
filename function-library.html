@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function library example</title>
+  <style>
+    input {
+      font-size: 2em;
+      margin: 10px 1px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <input class="numberInput" type="text">
+  <p></p>
+
+  <script>
+    const input = document.querySelector('.numberInput');
+    const para = document.querySelector('p');
+
+    // A function that squares a given number
+    function squared(num) {
+        return num * num;
+    }
+
+    // A function that cubes a given number
+    function cubed(num) {
+        return num * num * num;
+        // Couldn't this also technically be return squared(num) * num?
+    }
+
+    // A function that returns the factorial of a given number
+    function factorial(num) {
+        // The next 2 lines take care of negative numbers and 0, allowing only positive numbers through
+        if (num < 0) return undefined;
+        if (num == 0) return 1;
+        // We are making x = num - 1 because it allows for simpler code, and easier counting at the same time
+        let x = num - 1;
+        // Because this only goes until x > 1, the last operation that will be done will always be the current num * 2
+        while (x > 1) {
+            // If we didn't set up x, this would be something like num *= (num - 1), which is just messy and unnecessary
+            num *= x;
+            x--;
+            // Simply put, take num, multiply it by 1 less than itself, then keep lessing 1 and multiplying it to the total
+        }
+
+        return num;
+    }
+
+    function squarert(num) {
+        return Math.sqrt(num);
+    }
+
+    function cubert(num) {
+        return Math.cbrt(num);
+    }
+
+    function circumference(num) {
+        return 2 * Math.PI * num;
+    }
+
+    // This makes the whole input section actually work, onchange will trigger each time something new is entered in and focus is taken off of the input field, such as through tabbing or pressing enter
+    input.onchange = function() {
+        // This makes sure that the value provided and being worked with is an actual number
+        const num = parseFloat(input.value);
+        // If the provided value isn't a number, the user is prompted to put in a number and no calculations are done
+        if (isNaN(num)) {
+            para.textContent = 'You need to enter a number!';
+        } else {
+            // Since we're putting this in a <p>, even my newlined template literal won't actually print out the newlines
+            para.textContent = `${num} squared is ${squared(num)}.
+            ${num} cubed is ${cubed(num)}.
+            ${num} factorial is ${factorial(num)}.
+            The square root of ${num} is ${squarert(num)}.
+            The cubed root of ${num} is ${cubert(num)}.
+            The circumference of a circle with a radius of ${num} is ${circumference(num)}.`;
+        }
+    }
+
+  </script>
+</body>
+</html>
